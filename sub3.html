@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LIVING ROOM 서브페이지</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <style>
+			* {margin:0; padding:0; box-sizing: border-box;}
+			ol,ul,li { list-style:none;}
+			a { text-decoration:none; color: black;}
+			img { vertical-align:top; border:none;}
+			table { border-collapse:collapse;}
+			.clear:after { content:""; display:block; clear:both;}
+
+			/* 헤더 영역 */
+			#header{width:100%; height: 72px; position: fixed; z-index: 1;
+							background-color: rgba(255,255,255,0.4); transition:all 0.5s;}
+
+			#header.on { background-color:rgba(0,0,0,1);}
+
+			#header.on .gnb > li > a { color:#fff;}
+
+			#header .h_bg{height: 280px;background-color:rgba(0,0,0,0.7);
+									position: absolute; z-index: 1; top: 0; left: 0; width: 100%;
+									background-color: rgba(0,0,0,0,.4);top: 72px; display: none;}
+			.logo{float: left; margin-left: 60px; margin-top: 25px;}
+			.gnb > li{float:left;margin-right: 35px; width: 100px;}
+			.gnb > li > a:hover {font-weight: bold;}
+			.gnb{ float: left;margin-left: 120px; margin-top: 29px;}
+			.sub_cv{position: absolute;top: 72px;width:1000px; left: 50%;margin-left: -500px; height:280px;z-index: 1; display:none;}
+			.sub li{text-indent: 5px; height: 40px;}
+			.sub{float: left; width: 200px; text-align:center; border-right: 1px solid #666;
+					height: 220px; margin-top: 30px;z-index: 1; }
+			.sub:last-child{border-right: 0;}
+			.sub li a{color: #999;}
+			.sub li a:hover {color: white;}
+			.sub > a {display: block; height: 100%; height: 40px; color:#fff; font-weight: bold; font-size: 18px;}
+			.s_menu {position: absolute; right: 25%; top: 30px;}
+			.s_menu li{float: left;}
+			.s_menu li:after {content:"|"; color:black; margin:0 20px; font-size: 12px;
+													position: relative; top: -2px}
+			.s_menu li:last-child:after{display: none;}
+			.s_menu li a.on{color: white;}
+
+			.icon{position: absolute; right: 20%; margin-top: 30px;}
+			.icon li {float: left;}
+			.icon li:last-child{width: 22px;}
+        
+       
+        
+			.top{position: fixed; width: 40px; bottom: 30px; right: 20px; transform: rotate(90deg) }
+			.top img{width: 100%;}
+        
+        
+      /* 모바일 메뉴 */
+		  .ham_menu{display: none;}
+        
+			.ham_cover{ width:250px; height: 100%; position: fixed; z-index: 995; right:-250px; top:0; transition: all 0.5s;}
+		
+			.ham_cover.on{ right: 0;}
+		
+		
+			.mobile{ position: absolute; top: 0; right:0; width:100%; 
+					background-color: rgba(0,0,0,0.9); height: 100%; padding-top: 100px;
+					}
+
+			.ham_close{ position: absolute; top: 20px; right: 20px; width: 30px; }
+			.ham_list{ text-align: center; line-height: 60px; }
+			.ham_list > li > a{ color: #fff; font-size: 20px; font-weight: bold;  }
+			.ham_list > li{ display: table; margin: 0 auto;}
+			.ham_list > li.on > a{ color: #888; display: block; }
+			.ham_list > li.on > a:after{ content: ""; display: block; position: relative; transition: all 0.5s;
+								width: 100%; height: 3px; background-color: #fff; margin: 0 auto; }
+			.ham_sub{ line-height: 30px; margin: 30px 0; display:none; }
+			.ham_sub a{ color: #ddd;}
+
+			.ham_s_menu{ position: absolute; top: 25px; left: 20px; }
+			.ham_s_menu li{ float: left; margin-right: 25px; }
+			.ham_s_menu li a{ color: #fff; }
+        
+        
+			/*리빙룸*/
+
+			.living{margin-bottom: 200px;;}
+			.living_bg{width: 100%; height: 580px; background-image: url(image/living.jpg); background-size: cover; background-position: center -100px; background-repeat: no-repeat;}
+			.living_bg > h3{font-size: 40px; text-align: center; padding-top: 150px; color: #b69987;}
+			.living_bg > h3:after{content: ""; display: block; clear: both; margin: 7px auto; width: 300px; height: 4px; background-color: #b69987;}
+
+			.btn_g{width: 1200px; margin: 0 auto; margin-top: 50px; }
+			.btn_g li {width: 200px; height: 50px; text-align: center; line-height: 50px; background-color: white; float:left; border: 1px solid #ccc; border-right: none; box-sizing: border-box;}
+			.btn_g li a{display: block; height: 100%; color: #999;}
+			.btn_g li:last-child{border-right: 1px solid #ccc;}
+			.btn_g li.on{background-color: pink; font-weight: bold;}
+			.btn_g li.on a{color: #7f7f7f;}
+
+			.content {width: 1280px; margin: 0 auto;}
+			.content > div {width: 300px; height: 300px; margin: 40px 10px;}
+			.content > div > a{color: #7f6355;}
+			.content > div > a > img{width: 100%;}
+			.l_text{line-height: 32px; padding-left: 40px;}
+			.l_text h6{font-size: 15px;}
+			.l_text p{color: #685c54;}
+
+        
+        
+			/* 푸터 영역 */
+			#footer{ background-color: #ddd;}
+			.f_center{ width: 80%;margin: 0 auto; padding: 50px 0;}
+			.f_top{ height: 100px;}
+			.f_top:after{ content: ""; display: block; width: 100%; height: 1px; background-color: #aaa; margin: 30px auto;}
+			.f_logo{ float: left; width: 20%; padding-left: 30px;}
+			.f_menu{ float: left; width: 55%;}
+			.f_menu li{ float: left; width: 100px; height: 30px; line-height: 30px; font-size: 13px;}
+			.f_menu li a{ color: #555;}
+			.f_cs{ float: right; width: 23%; color: #555; margin-bottom: 20px; padding-left: 50px;
+				border-left: 1px solid #aaa;}
+		
+			.f_sns{ padding-left: 30px; float: left; width: 20%; }
+			.f_sns li{ float: left; width: 30px; }
+			.f_text{ float: left; color: #333; font-size: 14px; width: 50%;}
+
+			.f_mark{float: right; width: 30%; margin-top: 30px;}
+			.f_mark li{ float: left; margin-left: 20px;}
+        
+        
+/*       반응형 768px */        
+         @media screen and (max-width:768px){
+
+/*           반응형 768px 헤더*/
+            .gnb{display: none;}
+            .s_menu{display: none;}
+            .icon{display: none;}
+            
+/*            #header{position: relative;}*/
+            .ham_menu{display: block; position: absolute; top: 20px; right: 20px;}
+            
+/*           반응형 768px 리빙BG*/
+            .living_bg{width: 100%; height: 450px;}
+            .btn_g{width: 80%;}
+            .btn_g li {width: 33.333333%; border-right: none; border-bottom: none;}
+            .btn_g li:nth-child(3n) {border-right: 1px solid #ccc; box-sizing: border-box;}
+            .btn_g li:nth-child(4){border-bottom: 1px solid #ccc;}
+            .btn_g li:nth-child(5){border-bottom: 1px solid #ccc;}
+            .btn_g li:nth-child(6){border-bottom: 1px solid #ccc;}
+
+/*           반응형 768px 상품목록*/
+            .content {width: 100%;}
+            .content > div {width: 31.333333%; margin: 40px 1%;}
+
+            
+/*           반응형 768px 푸터*/            
+            .f_center{ padding: 30px 0;}
+						.f_top{ display: none;}
+						.f_logo{ display: none;}
+						.f_sns{ width: 100px; padding-left: 0; padding-bottom: 50px; margin: 0 auto; float: none;}
+						.f_text{ float: none; text-align: center; width: 100%;}
+						.f_mark{display: none;}
+ 
+        }
+        
+        @media screen and (max-width:640px){
+
+            .btn_g{width: 80%;}
+            .btn_g li {width: 50%; border-right: none; border-bottom: none;}
+            .btn_g li:nth-child(2n) {border-right: 1px solid #ccc;}
+            .btn_g li:nth-child(3) {border-right: none;}
+            .btn_g li:nth-child(4) {border-bottom: none;}
+            
+            .content {width: 100%;}
+            .content > div {width: 48%; margin: 40px 1%;}
+           
+        }
+        
+        
+        
+    </style>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript">
+    
+        $(document).ready(function(){
+           
+               //      header   마우스 올렸을 때    //
+            
+            $(".shop > a").eq(0).mouseenter(function(){
+                
+                $(".sub_cv").stop().show();
+                $(".h_bg").stop().show();
+            });
+            $(".sub_cv").mouseleave(function(){
+               
+                $(".sub_cv").stop().hide();
+                $(".h_bg").stop().hide();
+            });
+            
+            
+            
+            
+            //isotope 기본 세팅
+            $(".content").isotope({
+                itemSelector: '.all',
+                layoutMode: 'fitRows',
+                
+            })
+            
+            
+            //버튼 클릭 시 정렬 기능 실행!
+            $(".btn_g li").click(function(event){
+                event.preventDefault();
+                
+                //버튼 활성화 및 제거 구간
+                var list = $(this).index();
+                $(".btn_g li").removeClass("on");
+                $(".btn_g li").eq(list).addClass("on");
+                
+                
+                //공식 사이트에 안 나와 있음 선생님이 찾아서 알려주심
+                //클릭한 버튼의 속성값 받아오기
+                //attr 선택한 태그의 html 속성값을 가져올 때
+                //<div href="링크주소"> === <태그명 속성이름="속성값">
+                var value = $(this).attr("data-list");
+                    
+                //버튼 클릭 시 움직임 들어가면서 정렬 기능 실행!
+                $(".content").isotope({
+                filter : value
+                })
+                
+            });
+            
+             //      오른쪽아래 버튼누르면 맨위로       //
+            
+                $(".top").click(function(){
+                    $("html,body").animate({"scrollTop":0})   
+                    
+                });
+                 
+            
+            //스크롤 내렸을때 유투브 구간까지 도달하면 헤더는 디자인 변경
+            
+            $(window).scroll(function(){
+               
+                var sc_top = $(this).scrollTop();
+                
+                var content = $(".content").offset().top;
+              
+                if(sc_top >= content ) {
+                    
+                    $("#header").addClass("on");
+                    $(".logo img").attr("src","image/logo_white.png");
+                    $(".icon li:first-child img").attr("src","image/search_white.png");
+                    $(".icon li:last-child img").attr("src","image/cart_white.png");
+                    $(".ham_menu img").attr("src","image/ham_menu_white.png");
+                    $(".s_menu li a").addClass("on");
+                   $(".top").stop().fadeIn(500);
+//                    $(".s_menu li:after").css({"color":"white"})
+                }
+                else {
+                    
+                    $("#header").removeClass("on");
+                    $(".logo img").attr("src","image/logo.png");
+                    $(".icon li:first-child img").attr("src","image/gnb_search_3.png");
+                    $(".icon li:last-child img").attr("src","image/gnb_cart_3.png");
+                    $(".ham_menu img").attr("src","image/ham_menu.png");
+                    $(".s_menu li a").removeClass("on");
+                    $(".top").stop().fadeOut(500);
+                }
+            });
+            
+            
+            //모바일 메뉴 나오게 하기
+			$(".ham_menu").click(function(){
+				$(".ham_cover").addClass("on");
+			});
+			
+			//모바일 매뉴 숨기기
+			$(".ham_close").click(function(){
+				$(".ham_cover").removeClass("on");
+			});
+			
+			//쇼핑 메뉴 누르면 서브메뉴 나오게
+			
+			$(".ham_list > li > a").click(function(){
+				
+				//show() --> hide() // hide() -- > show()
+				$(this).siblings(".ham_sub").slideToggle();
+				$(this).parent().toggleClass("on");
+			});
+        
+        });
+        
+    </script>
+</head>
+<body>
+<div id="header">
+       <div class="h_bg"></div>
+        <h1 class="logo"><a href="index.html"><img src="image/logo.png" alt=""></a></h1>
+        <ul class="gnb clear">
+            <li class="shop"><a href="sub3.html">SHOPPING</a>
+               <div class="sub_cv">
+                <ul class="sub">
+                    <a href="#">Series</a>
+                    <li><a href="#">Kai</a></li>
+                    <li><a href="#">Moku</a></li>
+                    <li><a href="#">Liv</a></li>
+                </ul>
+                <ul class="sub">
+                    <a href="#">BEDROOM</a>
+                    <li><a href="#">Bed</a></li>
+                    <li><a href="#">Bedside table</a></li>
+                    <li><a href="#">Drawer</a></li>
+                    <li><a href="#">Dressing table</a></li>
+                </ul>
+                <ul class="sub">
+                    <a href="#">LIVING ROOM</a>
+                    <li><a href="#">TV Stand</a></li>
+                    <li><a href="#">Storage</a></li>
+                    <li><a href="#">Sofa</a></li>
+                    <li><a href="#">Table</a></li>
+                    <li><a href="#">Chair</a></li>
+                </ul>
+                <ul class="sub">
+                    <a href="#">Home office</a>
+                    <li><a href="#">Desk</a></li>
+                    <li><a href="#">Chair</a></li>
+                    <li><a href="#">Bookshelf</a></li>
+                </ul>
+                <ul class="sub">
+                    <a href="#">Kitchen</a>
+                    <li><a href="#">Table</a></li>
+                    <li><a href="#">Storage</a></li>
+                </ul> 
+                </div> 
+            </li>
+            <li><a href="sub2.html">ABOUT US</a></li>
+            <li><a href="#">GALLERY</a></li>
+            <li><a href="#">BOARD</a></li>
+        </ul>
+        <ul class="s_menu clear">
+            <li><a href="#">LOGIN</a></li>
+            <li><a href="#">JOIN</a></li>
+            <li><a href="#">MY PAGE</a></li>
+        </ul>
+        <ul class="icon clear">
+            <li><a href="#"><img src="image/gnb_search_3.png" alt=""></a></li>
+            <li><a href="#"><img src="image/gnb_cart_3.png" alt=""></a></li>
+        </ul>
+        <a class="ham_menu" href="#"><img src="image/ham_menu.png" alt=""></a>
+      
+    </div>
+           
+    <div class="ham_cover">
+		<div class="mobile">
+			<a href="#"><img class="ham_close" src="image/ham_close_white.png" alt=""></a>
+			<ul class="ham_s_menu">
+				<li><a href="#">LOGIN</a></li>
+				<li><a href="#">JOIN</a></li>
+			</ul>
+			<ul class="ham_list">
+				<li class="shop_sub">
+					<a href="#">SHOPPING</a>
+					<ul class="ham_sub">
+						<li><a href="#">Series</a></li>
+						<li><a href="#">Bed Room</a></li>
+						<li><a href="sub3.html">Living Room</a></li>
+						<li><a href="#">Home Office</a></li>
+						<li><a href="#">Kitchen</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="sub2.html">ABOUT US</a>
+				</li>
+				<li><a href="#">GALLERY</a></li>
+				<li><a href="#">BOARD</a></li>
+			</ul>
+		</div>	
+		
+	</div>
+            
+<!--             서브메인             -->
+        
+            <div class="living">
+           <div class="living_bg">
+               <h3>LIVING ROOM</h3>
+           </div>
+            <ul class="btn_g clear">
+                <li class="on" data-list="*"><a href="#">All</a></li>
+                <li data-list=".tv_stand"><a href="#">TV stand</a></li>
+                <li data-list=".storage"><a href="#">Storage</a></li>
+                <li data-list=".sofa"><a href="#">Sofa</a></li>
+                <li data-list=".table"><a href="#">Table</a></li>
+                <li data-list=".chair"><a href="#">Chair</a></li>
+                
+            </ul>
+            <div class="content">
+                <div class="all tv_stand">
+                   <a href="#">
+                        <img src="image/tv_stand/tv_stand1.jpg" alt="tv스탠드1">
+                        <div class="l_text">
+                           <h6>모던 TV스탠드 1</h6>
+                            <p>580,000원</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa1.jpg" alt="소파1">
+                    <div class="l_text">
+                       <h6>모던 소파 1</h6>
+                        <p>1,280,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all storage">
+                    <a href="#">
+                    <img src="image/storage/storage1.jpg" alt="스토리지1">
+                    <div class="l_text">
+                       <h6>모던 스토리지</h6>
+                        <p>380,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa2.png" alt="소파2">
+                    <div class="l_text">
+                       <h6>어반 소파</h6>
+                        <p>880,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table1.jpg" alt="테이블1">
+                    <div class="l_text">
+                       <h6>클래식 테이블 </h6>
+                        <p>220,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all tv_stand">
+                    <a href="#">
+                    <img src="image/tv_stand/tv_stand2.jpg" alt="tv스탠드2">
+                    <div class="l_text">
+                       <h6>클래식 TV 스탠드</h6>
+                        <p>1,720,000원</p>
+                    </div>    
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair1.jpg" alt="의자1">
+                    <div class="l_text">
+                       <h6>어반 의자</h6>
+                        <p>310,000원</p>
+                    </div>    
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa3.jpg" alt="소파3">
+                    <div class="l_text">
+                       <h6>오블리크 소파</h6>
+                        <p>1,180,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table2.jpg" alt="테이블2">
+                    <div class="l_text">
+                       <h6>큐브 테이블</h6>
+                        <p>520,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all tv_stand">
+                    <a href="#">
+                    <img src="image/tv_stand/tv_stand3.jpg" alt="tv스탠드3">
+                    <div class="l_text">
+                       <h6>빈티지 오블리크 TV스탠드</h6>
+                        <p>2,220,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa4.jpg" alt="소파4">
+                    <div class="l_text">
+                       <h6>레트로 소파</h6>
+                        <p>710,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table3.jpg" alt="테이블3">
+                    <div class="l_text">
+                       <h6>어반 테이블</h6>
+                        <p>480,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair2.jpg" alt="의자2">
+                    <div class="l_text">
+                       <h6>라센느 의자</h6>
+                        <p>280,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa5.jpg" alt="소파5">
+                    <div class="l_text">
+                       <h6>라센느 소파</h6>
+                        <p>2,180,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table4.jpg" alt="테이블4">
+                    <div class="l_text">
+                       <h6>다이아몬드 테이블</h6>
+                        <p>320,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair3.jpg" alt="의자3">
+                    <div class="l_text">
+                       <h6>로터스 체어</h6>
+                        <p>310,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all tv_stand">
+                    <a href="#">
+                    <img src="image/tv_stand/tv_stand4.jpg" alt="tv스탠드4">
+                    <div class="l_text">
+                       <h6>트러스 TV스탠드</h6>
+                        <p>380,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa6.jpg" alt="소파6">
+                    <div class="l_text">
+                       <h6>트러스 소파</h6>
+                        <p>7,770,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all storage">
+                    <a href="#">
+                    <img src="image/storage/storage2.jpg" alt="스토리지2">
+                    <div class="l_text">
+                       <h6>컴비네이션 스토리지</h6>
+                        <p>220,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table5.jpg" alt="테이블5">
+                    <div class="l_text">
+                       <h6>노르딕 테이블</h6>
+                        <p>440,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair4.jpg" alt="의자4">
+                    <div class="l_text">
+                       <h6>코지 체어</h6>
+                        <p>130,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all tv_stand">
+                    <a href="#">
+                    <img src="image/tv_stand/tv_stand5.jpg" alt="tv스탠드5">
+                    <div class="l_text">
+                       <h6>코지 TV스탠드</h6>
+                        <p>980,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair5.jpg" alt="의자5">
+                    <div class="l_text">
+                       <h6>로즈우드 체어</h6>
+                        <p>110,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa7.jpg" alt="소파7">
+                    <div class="l_text">
+                       <h6>뉴 제이 소파</h6>
+                        <p>3,320,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all storage">
+                    <a href="#">
+                    <img src="image/storage/storage3.jpg" alt="스토리지3">
+                    <div class="l_text">
+                       <h6>그랜드 스토리지</h6>
+                        <p>340,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table6.jpg" alt="테이블6">
+                    <div class="l_text">
+                       <h6>호리즌 테이블</h6>
+                        <p>380,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair6.jpg" alt="의자6">
+                    <div class="l_text">
+                       <h6>엔틱 체어</h6>
+                        <p>220,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all tv_stand">
+                    <a href="#">
+                    <img src="image/tv_stand/tv_stand6.jpg" alt="tv스탠드6">
+                    <div class="l_text">
+                       <h6>제이 TV스탠드</h6>
+                        <p>4,430,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa8.jpg" alt="소파8">
+                    <div class="l_text">
+                       <h6>몽마르뜨 소파</h6>
+                        <p>380,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table7.jpg" alt="테이블7">
+                    <div class="l_text">
+                       <h6>라인 테이블1</h6>
+                        <p>1,280,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair7.jpg" alt="의자7">
+                    <div class="l_text">
+                       <h6>빈티지 체어</h6>
+                        <p>190,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa9.jpg" alt="소파9">
+                    <div class="l_text">
+                       <h6>세타피아 소파</h6>
+                        <p>1,220,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table8.jpg" alt="테이블8">
+                    <div class="l_text">
+                       <h6>라인 테이블2</h6>
+                        <p>1,220,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair8.jpg" alt="의자8">
+                    <div class="l_text">
+                       <h6>뉴티크 체어</h6>
+                        <p>310,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa10.jpg" alt="소파10">
+                    <div class="l_text">
+                       <h6>가넷 소파 1</h6>
+                        <p>2,130,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all storage">
+                    <a href="#">
+                    <img src="image/storage/storage4.jpg" alt="스토리지4">
+                    <div class="l_text">
+                       <h6>토파즈 스토리지 1 </h6>
+                        <p>450,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table9.jpg" alt="테이블9">
+                    <div class="l_text">
+                       <h6>다이아몬드 테이블 </h6>
+                        <p>320,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair9.jpg" alt="의자9">
+                    <div class="l_text">
+                       <h6>다이아몬드 체어</h6>
+                        <p>220,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa11.jpg" alt="소파11">
+                    <div class="l_text">
+                       <h6>가넷 소파 2</h6>
+                        <p>2,220,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all storage">
+                    <a href="#">
+                    <img src="image/storage/storage5.jpg" alt="스토리지5">
+                    <div class="l_text">
+                       <h6>토파즈 스토리지 2</h6>
+                        <p>440,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table10.jpg" alt="테이블10">
+                    <div class="l_text">
+                       <h6>크로스 테이블</h6>
+                        <p>350,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair10.jpg" alt="의자10">
+                    <div class="l_text">
+                       <h6>심플 체어</h6>
+                        <p>280,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa12.jpg" alt="소파12">
+                    <div class="l_text">
+                       <h6>바르셀로나 소파</h6>
+                        <p>780,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table11.jpg" alt="테이블11">
+                    <div class="l_text">
+                       <h6>타워 테이블</h6>
+                        <p>370,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all storage">
+                    <a href="#">
+                    <img src="image/storage/storage6.jpg" alt="스토리지6">
+                    <div class="l_text">
+                       <h6>블랙우드 스토리지</h6>
+                        <p>380,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair11.jpg" alt="의자11">
+                    <div class="l_text">
+                       <h6>케임브리지 체어</h6>
+                        <p>310,000원</p>
+                    </div>
+                    </a>
+                </div>                
+                <div class="all sofa">
+                    <a href="#">
+                    <img src="image/sofa/sofa13.jpg" alt="소파13">
+                    <div class="l_text">
+                       <h6>베니 소파</h6>
+                        <p>3,550,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table12.jpg" alt="테이블12">
+                    <div class="l_text">
+                       <h6>디아나 테이블 </h6>
+                        <p>760,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all chair">
+                    <a href="#">
+                    <img src="image/chair/chair12.jpg" alt="의자12">
+                    <div class="l_text">
+                       <h6>래프 우드 체어</h6>
+                        <p>120,000원</p>
+                    </div>
+                    </a>
+                </div>
+                <div class="all table">
+                    <a href="#">
+                    <img src="image/table/table13.jpg" alt="테이블13">
+                    <div class="l_text">
+                       <h6>베이직 테이블</h6>
+                        <p>170,000원</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <p class="top"><a href="#"><img src="image/left.png" alt=""></a></p>
+        </div>
+        
+    <!--  하단 영역  -->
+    
+    <div id="footer">
+    	<div class="f_center">
+    		<div class="f_top clear">
+    			<div class="f_logo"><img src="image/logo_gray.png" alt=""></div>
+    			<ul class="f_menu clear">
+    				<li><a href="#">SHOPPING</a></li>
+    				<li><a href="#">ABOUT US</a></li>
+    				<li><a href="#">GALLERY</a></li>
+    				<li><a href="#">BOARD</a></li>
+    			</ul>
+    			<div class="f_cs">
+    				<h5>고객센터</h5>
+    				<h3>031-944-4408</h3>
+    			</div>
+    		</div>
+    		<div class="f_bot clear">
+    			<ul class="f_sns">
+    				<li><a href="#"><img src="image/footer_i.png" alt=""></a></li>
+    				<li><a href="#"><img src="image/footer_f.png" alt=""></a></li>
+    				<li><a href="#"><img src="image/footer_b.png" alt=""></a></li>
+    			</ul>
+    			<div class="f_text">
+    				<p>company : 뮤즈갤러리 owner : 원경숙</p>
+    				<p>business licence : 138-29-00024</p>
+    				<p>online licence : 2015-경기파주-6998 cpo : 정상기</p>
+    				<p>address : 경기도 파주시 산남로 185 (산남동) 뮤즈갤러리 / 10882</p>
+    				<p>&copy;copyright 2016 뮤즈퍼니쳐 all right reserved. designed by studio 순희</p>
+    			</div>
+    			<ul class="f_mark">
+    				<li><img src="image/mark_1.png" alt=""></li>
+    				<li><img src="image/mark_2.png" alt=""></li>
+    				<li><img src="image/mark_3.png" alt=""></li>
+    			</ul>
+    		</div>
+    	</div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+

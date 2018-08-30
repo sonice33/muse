@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>sub2</title>
+    <link rel="stylesheet" href="css/aos.css">
+    <style>
+			* {margin:0; padding:0; box-sizing: border-box;}
+			ol,ul,li { list-style:none;}
+			a { text-decoration:none; color: black;}
+			img { vertical-align:top; border:none;}
+			table { border-collapse:collapse;}
+			body,html {height: 100%;}
+			.clear:after { content:""; display:block; clear:both;}
+        
+			/* 헤더 영역 */
+			#header{width:100%; height: 72px; position: fixed; z-index: 1;
+							background-color: rgba(255,255,255,0.4); transition:all 0.5s;}
+
+			#header.on { background-color:rgba(0,0,0,1);}
+
+			#header.on .gnb > li > a { color:#fff;}
+
+			#header .h_bg{height: 280px;background-color:rgba(0,0,0,0.7);
+									position: absolute; z-index: 1; top: 0; left: 0; width: 100%;
+									background-color: rgba(0,0,0,0,.4);top: 72px; display: none;}
+			.logo{float: left; margin-left: 60px; margin-top: 25px;}
+			.gnb > li{float:left;margin-right: 35px; width: 100px;}
+			.gnb > li > a:hover {font-weight: bold;}
+			.gnb{ float: left;margin-left: 120px; margin-top: 29px;}
+			.sub_cv{position: absolute;top: 72px;width:1000px; left: 50%;margin-left: -500px; height:280px;z-index: 1;}
+			.sub li{text-indent: 5px; height: 40px;}
+			.sub{float: left; width: 200px; text-align:center; border-right: 1px solid #666;
+					height: 220px; margin-top: 30px;z-index: 1; display: none;}
+			.sub:last-child{border-right: 0;}
+			.sub li a{color: #999;}
+			.sub li a:hover {color: white;}
+			.sub > a {display: block; height: 100%; height: 40px; color:#fff; font-weight: bold; font-size: 18px;}
+			.s_menu {position: absolute; right: 25%; top: 30px;}
+			.s_menu li{float: left;}
+			.s_menu li:after {content:"|"; color:black; margin:0 20px; font-size: 12px;
+													position: relative; top: -2px}
+			.s_menu li:last-child:after{display: none;}
+			.s_menu li a.on{color: white;}
+
+			.icon{position: absolute; right: 20%; margin-top: 30px;}
+			.icon li {float: left;}
+			.icon li:last-child{width: 22px;}
+			.ham_menu{ float: right; margin: 20px 30px 0 0; display: none; }
+
+        
+			/* 모바일 메뉴 */
+
+			.ham_cover{ width:250px; height: 100%; position: fixed; z-index: 995; right:-250px; top:0; transition: all 0.5s;}
+
+			.ham_cover.on{ right: 0;}
+
+
+			.mobile{ position: absolute; top: 0; right:0; width:100%; 
+					background-color: rgba(0,0,0,0.9); height: 100%; padding-top: 100px;
+					}
+
+			.ham_close{ position: absolute; top: 20px; right: 20px; width: 30px; }
+			.ham_list{ text-align: center; line-height: 60px; }
+			.ham_list > li > a{ color: #fff; font-size: 20px; font-weight: bold;  }
+			.ham_list > li{ display: table; margin: 0 auto;}
+			.ham_list > li.on > a{ color: #888; display: block; }
+			.ham_list > li.on > a:after{ content: ""; display: block; position: relative; transition: all 0.5s;
+								width: 100%; height: 3px; background-color: #fff; margin: 0 auto; }
+			.ham_sub{ line-height: 30px; margin: 30px 0; display:none; }
+			.ham_sub a{ color: #ddd;}
+
+			.ham_s_menu{ position: absolute; top: 25px; left: 20px; }
+			.ham_s_menu li{ float: left; margin-right: 25px; }
+			.ham_s_menu li a{ color: #fff; }
+		
+			/* cont1 영역 */
+			.cont1 {background-image: url(image/bg3.jpg); height: 400px; background-attachment: fixed;
+			background-size: cover; background-position: center -200px; position: relative;}
+			.text_box{ width: 700px; height: 200px; margin: 0 auto; text-align: center; background-color:rgba(215,201,201,0.6); padding: 50px 0; line-height: 20px;
+					font-size: 16px;box-shadow: 5px 5px 30px #777; position: absolute; top: 50%;left: 50%; transform: translateX(-50%)translateY(-50%); }
+			.text_box h2{ font-size: 25px; color: #888;}
+					.text {color: #666; font-size: 15px; padding-top: 30px; font-weight: 900; }
+
+			/* cont2 영역 */
+			.cont2{ width: 70%; margin: 100px auto; height: 500px;}
+			.cont2_list li{ float: left; width: 50%; height: 250px; padding: 50px; }
+			.cont2_list li img{ width: 150px; height: 150px; border-radius: 50%; float: left;}
+			.cont2_list li .text{ padding-left: 200px;}
+			.cont2_list li .text h4{ color: #333; margin-bottom: 10px; }
+			.cont2_list li .text p{font-size: 13px;}
+			.cont2 h3{ font-size: 20px; text-align: center;}
+					.cont2 h3:after{content: ""; display: block; clear: both; width: 80px; margin: 10px auto; 					 height: 3px; background-color: black;}
+			.leaf1,.leaf2{ position: absolute; top: 80%; width: 200px;}
+			.leaf1 img,.leaf2 img{ width: 100%;}
+			.leaf1{ display: none;}
+			.leaf2{ display: none;}
+		
+			/* cont3 영역 */
+			.cont3{ width: 70%; margin: 100px auto; height: 220px;}
+			.cont3_list li{ float: left; width: 30%; height: 220px; margin-right: 5%;background-color: #666; color: #fff; text-align: center; padding: 30px;}
+			.cont3_list li:last-child{ margin-right: 0;}
+			.cont3_list li h4{ font-size:18px; }
+			.cont3_list li h4:after{ content: ""; display: block; width: 80%; height: 1px; 
+								background-color: #fff; margin: 20px auto;}
+			.cont3_list li p{ font-size: 14px; }
+
+			/* 푸터 영역 */
+			#footer{ background-color: #ddd;}
+			.f_center{ width: 80%;margin: 0 auto; padding: 50px 0;}
+			.f_top{ height: 100px;}
+			.f_top:after{ content: ""; display: block; width: 100%; height: 1px; background-color: #aaa; margin: 30px auto;}
+			.f_logo{ float: left; width: 20%; padding-left: 30px;}
+			.f_menu{ float: left; width: 55%;}
+			.f_menu li{ float: left; width: 100px; height: 30px; line-height: 30px; font-size: 13px;}
+			.f_menu li a{ color: #555;}
+			.f_cs{ float: right; width: 23%; color: #555; margin-bottom: 20px; padding-left: 50px;
+				border-left: 1px solid #aaa;}
+			.f_bot{ }
+			.f_sns{ padding-left: 30px; float: left; width: 20%; }
+			.f_sns li{ float: left; width: 30px; }
+			.f_text{ float: left; color: #333; font-size: 14px; width: 50%;}
+
+			.f_mark{float: right; width: 30%; margin-top: 30px;}
+			.f_mark li{ float: left; margin-left: 20px;}
+		
+			/* 모바일  768px */   
+      @media screen and (max-width:768px){
+            
+        /* 헤더 */
+        .gnb > li{ display: none;}
+				.ham_menu{ display: inline-block;position: absolute; right: 0; }
+				.s_menu{ display: none;}
+				.icon{ display: none;}
+  
+        .cont1 {display: none;}
+           
+				/* cont2 영역 */
+				.cont2{ width: 80%; margin: 0 auto; height: 1000px;
+                padding-top: 85px;}
+        .cont2_list {width: 80%;margin-left: 10%;}
+				.cont2_list li{ float: left; width:100%; height: 250px; padding: 0px; }
+	
+            
+        /* cont3 영역 */
+				.cont3{ width: 80%; margin: 100px auto; height:auto;}
+				.cont3_list li{ width: 100%; height: 200px; margin-right: 0; margin-bottom: 5%;}
+				.cont3_list li p{line-height: 20px; font-size: 14px; }
+            
+        	
+    		/* 푸터 영역 */
+        .f_center{  padding: 30px 0;}
+        .f_top{ display: none;}
+				.f_logo{ display: none;}
+				.f_sns{ width: 100px; padding-left: 0; padding-bottom: 50px; margin: 0 auto; float: none;}
+				.f_text{ float: none; text-align: center; width: 100%;}
+				.f_mark{display: none;}
+ 
+       }
+        
+        /* 모바일  640px */
+        @media screen and (max-width:640px){
+            
+					/* cont2 영역 */
+					.cont2{ width: 100%; margin: 0 auto; height: 1000px;
+									padding-top: 85px;}
+					.cont2_list {width: 80%;margin-left: 10%;}
+					.cont2_list li{ float: left; width:100%; height: 250px; padding: 0px;
+         
+				}
+				/* 모바일 414px; */
+        @media screen and (max-width:414px){
+            
+					/* cont2 영역 */
+					.cont2{ width: 100%; margin: 0 auto; height:auto;
+									padding-top: 85px;}
+					.cont2_list {width: 80%;margin-left: 10%;}
+					.cont2_list li img{text-align: center;}
+					.cont2_list li{ float:none; width:100%; height: 350px; padding: 0px;text-align: center; }
+					.cont2_list li img {float: none;}
+					.cont2_list li .text {padding-left: 0;}
+					.cont2 h3{padding-bottom: 70px;}
+
+
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/aos.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+			AOS.init();
+			
+			//      header   마우스 올렸을 때    //
+            
+			$(".shop > a").eq(0).mouseenter(function(){
+
+					$(".sub").stop().show();
+					$(".h_bg").stop().show();
+			});
+			$(".sub_cv").mouseleave(function(){
+
+					$(".sub").stop().hide();
+					$(".h_bg").stop().hide();
+			});
+
+			
+			//스크롤 내렸을때 유투브 구간까지 도달하면 헤더는 디자인 변경
+            
+      $(window).scroll(function(){
+               
+				var sc_top = $(this).scrollTop();
+
+				var cont1 = $(".cont2").offset().top;
+
+				if(sc_top >= cont1) {
+
+						$("#header").addClass("on");
+						$(".logo img").attr("src","image/logo_white.png");
+						$(".icon li:first-child img").attr("src","image/search_white.png");
+						$(".icon li:last-child img").attr("src","image/cart_white.png");
+						$(".s_menu li a").addClass("on");
+						$(".ham_menu img").attr("src","image/ham_menu_white.png");
+				}
+				else {
+
+						$("#header").removeClass("on");
+						$(".logo img").attr("src","image/logo.png");
+						$(".icon li:first-child img").attr("src","image/gnb_search_3.png");
+						$(".icon li:last-child img").attr("src","image/gnb_cart_3.png");
+						$(".s_menu li a").removeClass("on");
+				}
+
+			});
+            
+            	//모바일 메뉴 나오게 하기
+			$(".ham_menu").click(function(){
+				$(".ham_cover").addClass("on");
+			});
+			
+			//모바일 매뉴 숨기기
+			$(".ham_close").click(function(){
+				$(".ham_cover").removeClass("on");
+			});
+			
+			//쇼핑 메뉴 누르면 서브메뉴 나오게
+			
+			$(".ham_list > li > a").click(function(){
+				
+				//show() --> hide() // hide() -- > show()
+				$(this).siblings(".ham_sub").slideToggle();
+				$(this).parent().toggleClass("on");
+			});
+			
+		});
+		
+	</script>
+</head>
+<body>
+    <div id="header">
+       <p class="ham_menu"><img src="image/ham_menu.png" alt=""></p>
+       <div class="h_bg"></div>
+        <h1 class="logo"><a href="index.html"><img src="image/logo.png" alt=""></a></h1>
+        <ul class="gnb clear">
+            <li class="shop"><a href="sub3.html">SHOPPING</a>
+               <div class="sub_cv">
+                <ul class="sub">
+                    <a href="#">Series</a>
+                    <li><a href="#">Kai</a></li>
+                    <li><a href="#">Moku</a></li>
+                    <li><a href="#">Liv</a></li>
+                </ul>
+                <ul class="sub">
+                    <a href="#">BEDROOM</a>
+                    <li><a href="#">Bed</a></li>
+                    <li><a href="#">Bedside table</a></li>
+                    <li><a href="#">Drawer</a></li>
+                    <li><a href="#">Dressing table</a></li>
+                </ul>
+                <ul class="sub">
+                    <a href="sub3.html">LIVING ROOM</a>
+                    <li><a href="#">TV Stand</a></li>
+                    <li><a href="#">Storage</a></li>
+                    <li><a href="#">Sofa</a></li>
+                    <li><a href="#">Table</a></li>
+                    <li><a href="#">Console</a></li>
+                </ul>
+                <ul class="sub">
+                    <a href="#">Home office</a>
+                    <li><a href="#">Desk</a></li>
+                    <li><a href="#">Chair</a></li>
+                    <li><a href="#">Bookshelf</a></li>
+                </ul>
+                <ul class="sub">
+                    <a href="#">Kitchen</a>
+                    <li><a href="#">Table</a></li>
+                    <li><a href="#">Storage</a></li>
+                </ul> 
+                </div> 
+            </li>
+            <li><a href="#">ABOUT US</a></li>
+            <li><a href="#">GALLERY</a></li>
+            <li><a href="#">BOARD</a></li>
+        </ul>
+        <ul class="s_menu clear">
+            <li><a href="#">LOGIN</a></li>
+            <li><a href="#">JOIN</a></li>
+            <li><a href="#">MY PAGE</a></li>
+        </ul>
+        <ul class="icon clear">
+            <li><a href="#"><img src="image/gnb_search_3.png" alt=""></a></li>
+            <li><a href="#"><img src="image/gnb_cart_3.png" alt=""></a></li>
+        </ul>
+        <a href="#" class="ham_menu"><img src="image/ham_menu.png" alt=""></a>
+    </div>
+        
+        <div class="ham_cover">
+		<div class="mobile">
+			<a href="#"><img class="ham_close" src="image/ham_close_white.png" alt=""></a>
+			<ul class="ham_s_menu">
+				<li><a href="#">LOGIN</a></li>
+				<li><a href="#">JOIN</a></li>
+			</ul>
+			<ul class="ham_list">
+				<li class="shop_sub">
+					<a href="#">SHOPPING</a>
+					<ul class="ham_sub">
+						<li><a href="#">Series</a></li>
+						<li><a href="#">Bed Room</a></li>
+						<li><a href="sub3.html">Living Room</a></li>
+						<li><a href="#">Home Office</a></li>
+						<li><a href="#">Kitchen</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="sub2.html">ABOUT US</a>
+				</li>
+				<li><a href="#">GALLERY</a></li>
+				<li><a href="#">BOARD</a></li>
+			</ul>
+		</div>
+        </div>	
+   
+    <div id="container">
+		<div class="cont1">
+			<div class="text_box">
+				<h2>Brand Stroy</h2>
+				<p class="text">
+					저희 뮤즈퍼니쳐의 가구는 디자인과 견고함, 이 두가지를 가장 기본으로 <br>
+					생각하며 고객님들의 모든 공간에서 빛나기를 기원합니다.
+				</p>
+			</div>
+
+		</div>
+
+	   <div class="cont2">
+   			<h3 data-aos="fade-down" data-aos-duration="2000">ABOUT US</h3>
+	   		<ul class="cont2_list clear" data-aos="fade-down" data-aos-duration="2000">
+	   			<li >
+	   				<img src="image/sub2_1.jpg" alt="">
+	   				<div class="text">
+	   				 	<h4>가장 좋은 것만 주고 싶은</h4>
+	   					<p>뮤즈퍼니쳐의 고객이라면 나이불문, 국적불문 <br> 
+	   						누구나 사용했을때 편하도록 설계하였습니다. <br>
+	   						30년간 가구만 연구한 전문가의 안목으로 <br>
+	   						여러분의 인생과 함께 나아갈 것입니다.	
+	   					</p>
+	   				</div>
+	   			</li>
+	   			<li>
+	   				<img src="image/sub2_2.jpg" alt="">
+	   				<div class="text">
+	   					<h4>가구에 대한 고민</h4>
+	   					<p>가구는 모양새보다도 안정성이 중요합니다.<br>
+	   						모양은 아름답지만 앉았을때 불편하다면 <br>
+	   						그것은 좋은 의자라고 할 수 없겠죠. <br>
+	   						뮤즈퍼니쳐는 디자인뿐만 아니라 기능성까지 고려하여 만들었습니다.	
+	   					</p>
+	   				</div>
+	   			</li>
+	   			<li>        
+	   				<img src="image/sub2_3.jpg" alt="">
+	   				<div class="text">
+	   					<h4>꼼꼼하고 까다로운 기준</h4>
+	   					<p>우리 가족을 위하여 만든다는 생각으로<br>
+	   						브라질산 원목, 1등급 철강등 <br>
+	   						좋은 재료를 엄선하여 제작합니다. <br>
+	   						이러한 생각이 모여 2017년 한국가구협회<br>
+	   						 안정성 부문에서 특허를 인정받았습니다. 
+	   					</p>
+	   				</div>
+	   			</li>
+	   			<li>
+	   				<img src="image/sub2_4.jpg" alt="">
+	   				<div class="text">
+	   					<h4>기능성은 기본, All in one</h4>
+	   					<p>뮤즈퍼니펴는 하나의 가구에 여러가지의 기능을 <br>
+	   						담은 All in one제품으로 주목을 받았습니다. <br>
+	   					 	수납장이면서 거치대가 되고 가림막이 되는  <br>
+	   						무궁무진한 쓰임새로 활용해 보세요.	
+	   					</p>
+	   				</div>
+	   			</li>
+	   		</ul>	
+	   		<div class="leaf1" data-aos="fade-right" data-aos-duration="2000"><img src="image/sub2_leaf.png" alt=""></div>
+	   		<div class="leaf2" data-aos="fade-left" data-aos-duration="2000"><img src="image/sub2_leaf2.png" alt=""></div>
+	   </div>
+	   
+	   <div class="cont3">	
+	   		<ul class="cont3_list clear" data-aos="flip-down" data-aos-duration="2000">
+	   			<li>
+	   				<h4>CS center</h4>
+					<p>Tel : 031-944-4408 <br>
+					Fax : 031-944-4465 <br>
+					E-mail : musegallery_living@naver.com <br>
+					Addresss : 경기도 파주시 산남로 185 (산남동) <br>
+   					</p>
+	   			</li>
+	   			<li>
+	   				<h4>Work time</h4>
+					<p>09:00 - 19:00 <br> 
+					Open 365 Days <br>
+					(공휴일 10:30 - 19:00)	
+   					</p>
+	   			</li>
+	   			<li>
+	   				<h4>Bank info</h4>
+					<p>신한은행 . 110-444-400921 <br>
+					Account holder . 뮤즈갤러리
+   					</p>
+	   			</li>
+	   		</ul>
+	   </div>
+   </div>
+   
+   <!--  하단 영역  -->
+    <div id="footer">
+    	<div class="f_center">
+    		<div class="f_top clear">
+    			<div class="f_logo"><img src="image/logo_gray.png" alt=""></div>
+    			<ul class="f_menu clear">
+    				<li><a href="#">SHOPPING</a></li>
+    				<li><a href="#">ABOUT US</a></li>
+    				<li><a href="#">GALLERY</a></li>
+    				<li><a href="#">BOARD</a></li>
+    			</ul>
+    			<div class="f_cs">
+    				<h5>고객센터</h5>
+    				<h3>031-944-4408</h3>
+    			</div>
+    		</div>
+    		<div class="f_bot clear">
+    			<ul class="f_sns">
+    				<li><a href="#"><img src="image/footer_i.png" alt=""></a></li>
+    				<li><a href="#"><img src="image/footer_f.png" alt=""></a></li>
+    				<li><a href="#"><img src="image/footer_b.png" alt=""></a></li>
+    			</ul>
+    			<div class="f_text">
+    				<p>company : 뮤즈갤러리 owner : 원경숙</p>
+    				<p>business licence : 138-29-00024</p>
+    				<p>online licence : 2015-경기파주-6998 cpo : 정상기</p>
+    				<p>address : 경기도 파주시 산남로 185 (산남동) 뮤즈갤러리 / 10882</p>
+    				<p>&copy;copyright 2016 뮤즈퍼니쳐 all right reserved. designed by studio 순희</p>
+    			</div>
+    			<ul class="f_mark">
+    				<li><img src="image/mark_1.png" alt=""></li>
+    				<li><img src="image/mark_2.png" alt=""></li>
+    				<li><img src="image/mark_3.png" alt=""></li>
+    			</ul>
+    		</div>
+    	</div>
+    </div>
+    
+</body>
+</html>
