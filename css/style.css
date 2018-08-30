@@ -86,9 +86,9 @@ table { border-collapse:collapse;}
 
 .b_list{width: 1023px; margin: 0 auto;}
 .b_list li{float: left; width: 331px; height: 350px; margin: 0 5px; background-position: center center; background-repeat: no-repeat; position: relative;}
-.b_list li:nth-child(1){background-image: url(image/our_brand_01.png);}
-.b_list li:nth-child(2){background-image: url(image/our_brand_02.png);}
-.b_list li:nth-child(3){background-image: url(image/our_brand_03.png);}
+.b_list li:nth-child(1){background-image: url(../image/our_brand_01.png);}
+.b_list li:nth-child(2){background-image: url(../image/our_brand_02.png);}
+.b_list li:nth-child(3){background-image: url(../image/our_brand_03.png);}
 
 .b_text{color: white; width: 100%; text-align: center; margin-top: 80px; position: absolute; z-index: 1;}
 .b_text > h3{font-size: 32px; margin-bottom: 22px;}
@@ -98,7 +98,7 @@ table { border-collapse:collapse;}
 
 
 /* cont2 슬라이더 영역  */        
-.cont_2{height: 800px; background-image: url(image/slider11.jpg); width: 100%;
+.cont_2{height: 800px; background-image: url(../image/slider11.jpg); width: 100%;
 		background-size: cover; margin-top: 50px; background-position: center center;position: relative;}
 
 .cont_2 p{position: absolute; left: 20%; top:14%; color: #444;font-size: 25px;}
@@ -116,9 +116,9 @@ table { border-collapse:collapse;}
 .c2_right li img{width:100%; height: 400px;}
 .v_bt{position: absolute; bottom: 0; right: 0;height: 40px;}
 .v_bt li{width: 20px; height: 30px; margin: 0 20px;}
-.v_bt li:nth-child(1){background-image: url(image/left.png);
+.v_bt li:nth-child(1){background-image: url(../image/left.png);
 				background-size:cover;background-position: center center;}
-.v_bt li:nth-child(2){background-image: url(image/right.png);
+.v_bt li:nth-child(2){background-image: url(../image/right.png);
 				background-size:cover;background-position: center center;}
 
 
